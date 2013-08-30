@@ -2,7 +2,8 @@ package org.kndl.util;
 
 /**
  *
- * Byte manipulation for working with byte arrays.
+ * Byte manipulation for working with byte arrays.  All byte
+ * manipulation utilitizes big-ending byte codec's.
  *
  * @author skendall
  *
@@ -64,7 +65,22 @@ public class ByteUtil {
         
         return bytes;
     }
+    
+    
+    
+    public static char byteToChar(byte[] bytes, int startIdx) {
+    	char c = Character.forDigit((bytes[startIdx] << 8) | (bytes[startIdx+1]),10);
+    	return c;
+    }
+    
+    public static int byteToInt(byte[] bytes, int startIdx) {
+    	return 0;
+    }
 
+    public static long byteToLong(byte[] bytes) {
+    	return 0;
+    }
+    
     /**
      * Shift bytes in the array to the left by len.
      * 
