@@ -1,0 +1,25 @@
+
+ apply plugin: 'idea'
+ apply plugin: 'java'
+ apply plugin: 'groovy'
+ apply plugin: 'maven'
+ apply plugin: 'war'
+
+ repositories {
+     mavenCentral()
+ }
+
+ dependencies {
+
+     compile 'log4j:log4j:1.2.16'
+
+     testCompile 'junit:junit:4.11'
+
+ }
+
+ war {
+
+    baseName = project.name
+    archiveName = '${baseName}.${extension}'
+
+ }
