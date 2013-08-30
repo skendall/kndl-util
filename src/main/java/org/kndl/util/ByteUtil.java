@@ -9,19 +9,50 @@ package org.kndl.util;
  */
 public class ByteUtil {
 
+    /**
+     * Convert a char primitive to a byte array.
+     * 
+     * @param c
+     * @return
+     */
+    
+    public static byte[] charToByte(char c) {
+    	byte[] bytes = new byte[2];
+    	
+    	bytes[0] = (byte) (c >> 8);
+    	bytes[1] = (byte) c;
+    	
+    	return bytes;
+    }
+	
+	/**
+	 * Convert an integer primitive to a byte array.
+	 * 
+	 * @param i
+	 * @return
+	 */
+	
     public static byte[] intToByte(int i) {
         byte[] bytes = new byte[4];
 
-        bytes[0] = (byte) i;
-        bytes[1] = (byte) (i >> 8);
-        bytes[2] = (byte) (i >> 16);
-        bytes[3] = (byte) (i >> 24);
+        bytes[0] = (byte) (i >> 24);
+        bytes[1] = (byte) (i >> 16);
+        bytes[2] = (byte) (i >> 8);
+        bytes[3] = (byte) i;
 
         return bytes;
     }
 
+    /**
+     * Convert a long primitive to a byte array.
+     * 
+     * @param l
+     * @return
+     */
+    
     public static byte[] longToByte(long l) {
         byte[] bytes = new byte[8];
+        
         bytes[0] = (byte) (l >> 56);
         bytes[1] = (byte) (l >> 48);
         bytes[2] = (byte) (l >> 40);
@@ -29,10 +60,19 @@ public class ByteUtil {
         bytes[4] = (byte) (l >> 24);
         bytes[5] = (byte) (l >> 16);
         bytes[6] = (byte) (l >> 8);
-        bytes[7] = (byte) (l >> 0);
+        bytes[7] = (byte) l;
+        
         return bytes;
     }
 
+    /**
+     * Shift bytes in the array to the left by len.
+     * 
+     * @param bytes
+     * @param len
+     * @return
+     */
+    
     public static byte[] leftShift(byte[] bytes, int len) {
         if(bytes == null || bytes.length <= len)
             return new byte[bytes.length];
@@ -42,6 +82,14 @@ public class ByteUtil {
         return bytes;
     }
 
+    /**
+     * Shift bytes in the array to the right by len.
+     * 
+     * @param bytes
+     * @param len
+     * @return
+     */
+    
     public static byte[] rightShift(byte[] bytes, int len) {
         if(bytes == null || bytes.length <= len)
             return new byte[bytes.length];
@@ -50,15 +98,62 @@ public class ByteUtil {
             bytes[i] = bytes[i+len];
         return bytes;
     }
+    
+    /**
+     * Prints out a pretty hex version of a byte array.  The
+     * length of the line of text is specified based on the
+     * lineLen.
+     *  
+     * @param bytes
+     * @param lineLen
+     */
 
-    public static void bytePrint(byte[] bytes) {
-        for(int i=0;i<bytes.length;i++)
-            System.out.print(Integer.toHexString(bytes[i] & 0x00ff) + " ");
-        System.out.println();
-    }
+	public static void bytePrint(byte[] bytes, int lineLen) {
+
+		if (bytes.length < lineLen) {
+			
+			for (int i = 0; i < bytes.length; i++) {
+				String s = Integer.toHexString(bytes[i] & 0x00ff);
+				if (s.length() < 2)
+					s = "0" + s;
+				System.out.print(s + " ");
+			}
+			
+			System.out.println();
+			
+		} else {
+			
+			int count = 0;
+			
+			while (count < bytes.length) {
+				System.out.println("count = " + count);
+				for (int i = count; i < count+lineLen; i++) {
+					String s = Integer.toHexString(bytes[i] & 0x00ff);
+					if (s.length() < 2)
+						s = "0" + s;
+					System.out.print(s + " ");
+				}
+				count += lineLen;
+				System.out.println();
+			}
+			
+		}
+		
+	}
+	
+	/**
+	 * Conveniently print bytes in 8 columns.
+	 * 
+	 * @param bytes
+	 */
+	
+	public static void bytePrint(byte[] bytes) {
+		bytePrint(bytes,8);
+	}
 
     public static void main(String args[]) {
-        bytePrint(longToByte(Long.MAX_VALUE));
-        bytePrint(intToByte(Integer.MAX_VALUE));
+        bytePrint(longToByte(Long.MAX_VALUE), 4);
+        bytePrint(intToByte(Integer.MAX_VALUE), 4);
+        bytePrint(charToByte('A'), 4);
     }
 }
