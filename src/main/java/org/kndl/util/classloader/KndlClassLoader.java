@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- *
+ * Loads a class from any selection of remote jars.
  *
  *
  */
