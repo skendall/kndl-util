@@ -31,6 +31,7 @@ public class KndlClassLoader extends ClassLoader {
     public Class load(String className) {
         Class c = null;
         for(URLClassLoader loader : jarLocations) {
+            System.out.println("Loading " + loader.getURLs().toString());
             try {
                 c = Class.forName(className,true,loader);
             } catch (ClassNotFoundException e) {
