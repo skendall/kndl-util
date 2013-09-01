@@ -41,6 +41,15 @@ public class KndlClassLoader extends ClassLoader {
 
     }
 
+    public Class get(String className) {
+        try {
+            return Class.forName(className,true,this);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static void main(String args[]) {
         KndlClassLoader ncl = new KndlClassLoader();
         try {
@@ -49,5 +58,7 @@ public class KndlClassLoader extends ClassLoader {
             e.printStackTrace();
         }
         ncl.load("Test");
+        Class c = ncl.get("Test");
+        System.out.println(c.getSimpleName());
     }
 }
