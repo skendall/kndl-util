@@ -65,20 +65,88 @@ public class ByteUtil {
         
         return bytes;
     }
-    
-    
+
+    /**
+     * Converts bytes to a character.
+     *
+     * @param bytes
+     * @param startIdx
+     * @return
+     */
     
     public static char byteToChar(byte[] bytes, int startIdx) {
     	char c = Character.forDigit((bytes[startIdx] << 8) | (bytes[startIdx+1]),10);
     	return c;
     }
-    
-    public static int byteToInt(byte[] bytes, int startIdx) {
-    	return 0;
+
+    /**
+     * Convenience method for byteToChar(byte[],int)
+     *
+     * @param bytes
+     * @return
+     */
+
+    public static char byteToChar(byte[] bytes) {
+        return byteToChar(bytes,0);
     }
 
+    /**
+     * Converts bytes to an integer.
+     *
+     * @param bytes
+     * @param startIdx
+     * @return
+     */
+
+    public static int byteToInt(byte[] bytes, int startIdx) {
+        int i = 0;
+        i+=bytes[startIdx];
+        i+=bytes[startIdx+1] << 8;
+        i+=bytes[startIdx+2] << 16;
+        i+=bytes[startIdx+3] << 24;
+    	return i;
+    }
+
+    /**
+     * Convenience method for byteToInt(byte[])
+     *
+     * @param bytes
+     * @return
+     */
+
+    public static int byteToInt(byte[] bytes) {
+        return byteToInt(bytes,0);
+    }
+
+    /**
+     * Converts bytes to a long.
+     *
+     * @param bytes
+     * @return
+     */
+
+    public static long byteToLong(byte[] bytes, int startIdx) {
+        long i = 0;
+        i+=bytes[startIdx];
+        i+=bytes[startIdx+1] << 8;
+        i+=bytes[startIdx+2] << 16;
+        i+=bytes[startIdx+3] << 24;
+        i+=bytes[startIdx+4] << 32;
+        i+=bytes[startIdx+5] << 40;
+        i+=bytes[startIdx+6] << 48;
+        i+=bytes[startIdx+7] << 56;
+    	return i;
+    }
+
+    /**
+     * Convenience method for byteToLong(byte[], int)
+     *
+     * @param bytes
+     * @return
+     */
+
     public static long byteToLong(byte[] bytes) {
-    	return 0;
+        return byteToLong(bytes,0);
     }
     
     /**
