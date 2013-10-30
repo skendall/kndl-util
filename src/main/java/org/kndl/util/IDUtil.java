@@ -44,10 +44,8 @@ public class IDUtil {
 		int idx = 0;
 		if(IDX_ID.get() >= 256)
 			IDX_ID.set(0);
-		else
-			idx = IDX_ID.getAndIncrement();
 		long id = System.currentTimeMillis();
-		id = (id << 8) | idx;		
+		id = (id << 8) | IDX_ID.getAndIncrement();
 		return id;
     }
 
