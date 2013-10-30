@@ -50,21 +50,18 @@ public class IDUtil {
     }
 
     /**
-     * Generates a unique base-62 hash string based on a string
+     * Generates a unique base-64 hash string based on an integer
      * passed to the method.
      *
-     * @param str
+     * @param id
      * @return
      */
 
-    public final String shorten(String str) {
-        if(str == null || str.isEmpty())
-            return "";
-
+    public final String shortHash(int id) {
         StringBuilder hash = new StringBuilder();
 
-        int dividend = str.hashCode();
-        int remainder = 0;
+        int dividend = id;
+        int remainder;
 
         while(dividend != 0) {
             remainder = dividend & 63;
@@ -73,6 +70,20 @@ public class IDUtil {
         }
 
         return hash.toString();
+    }
+
+    /**
+     * Generates a unique base-64 hash string based on a string
+     * passed to the method.
+     *
+     * @param str
+     * @return
+     */
+
+    public final String shortHash(String str) {
+        if(str == null || str.isEmpty())
+            return "";
+        return shortHash(str.hashCode());
     }
 
 

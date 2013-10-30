@@ -11,7 +11,7 @@ public class IDUtilTest {
     public void shortenTest() {
         IDUtil util = new IDUtil();
         String s1 = "http://www.cnn.com";
-        assertTrue(util.shorten(s1).equals("n_y2Fd"));
+        assertTrue(util.shortHash(s1).equals("n_y2Fd"));
     }
 
     @Test
