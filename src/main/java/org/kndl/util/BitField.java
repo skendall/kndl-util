@@ -50,7 +50,8 @@ public final class BitField {
      */
 
     public final BitField set(int fieldPosition, long value) {
-        this.field = (this.field & ~(fieldSize << (fieldPosition * fieldSize))) | (value << (fieldPosition * fieldSize));
+        long tVal = value & (long)(Math.pow(2,fieldSize))-1;
+        this.field = field | (tVal << (fieldSize * fieldPosition));
         return this;
     }
 
@@ -115,8 +116,17 @@ public final class BitField {
 
     // accessors
 
+
+    public int getFieldSize() {
+        return fieldSize;
+    }
+
+    public void setFieldSize(int fieldSize) {
+        this.fieldSize = fieldSize;
+    }
+
     public final long get(int fieldPosition) {
-        return ((field >>> (fieldPosition * fieldSize)) & fieldSize);
+        return (field >>> (fieldPosition * fieldSize)) & (long)(Math.pow(2,fieldSize))-1;
     }
 
     public final long toLong() {
