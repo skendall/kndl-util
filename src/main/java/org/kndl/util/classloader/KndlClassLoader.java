@@ -91,18 +91,4 @@ public class KndlClassLoader extends ClassLoader {
 	public List<Class> getClasses() {
 		return loadedClasses;
 	}
-
-    public static void main(String args[]) {
-        KndlClassLoader ncl = new KndlClassLoader();
-        try {
-            ncl.addLocation(new URL("http://pants.spacerobots.org/test.jar"));
-            ncl.addLocation(new URL("http://repo1.maven.org/maven2/io/undertow/undertow-core/1.0.0.Beta12/undertow-core-1.0.0.Beta12.jar"));
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        List<Class> classes = ncl.loadAll();
-        for(Class c : classes) {
-        	System.out.println("Class: " + c.getName());
-        }
-    }
 }
