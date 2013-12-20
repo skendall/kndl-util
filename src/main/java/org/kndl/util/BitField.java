@@ -117,11 +117,12 @@ public final class BitField {
     // accessors
 
 
-    public int getFieldSize() {
+    public final int getFieldSize() {
         return fieldSize;
     }
 
-    public void setFieldSize(int fieldSize) {
+    public final void setFieldSize(int fieldSize) {
+        clear();
         this.fieldSize = fieldSize;
     }
 
