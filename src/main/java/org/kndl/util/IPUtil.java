@@ -11,7 +11,7 @@ import java.net.UnknownHostException;
  * @author skendall
  *
  */
-public class IPUtil {
+public final class IPUtil {
 
     /**
      * Takes an integer representation of an IP address and
@@ -21,7 +21,7 @@ public class IPUtil {
      * @return
      */
 
-    public static Inet4Address intToIP(int ipInt) {
+    public final static Inet4Address intToIP(int ipInt) {
         if(ipInt == 0)
             return null;
         byte[] bytes = ByteUtil.intToByte(ipInt);
@@ -42,7 +42,7 @@ public class IPUtil {
      * @return
      */
 
-    public static int IPtoInt(Inet4Address ip) {
+    public final static int IPtoInt(Inet4Address ip) {
         if(ip == null)
             return 0;
         return ByteUtil.byteToInt(ip.getAddress(),0);

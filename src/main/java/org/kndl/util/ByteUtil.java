@@ -8,7 +8,7 @@ package org.kndl.util;
  * @author skendall
  *
  */
-public class ByteUtil {
+public final class ByteUtil {
 
     /**
      * Convert a char primitive to a byte array.
@@ -17,7 +17,7 @@ public class ByteUtil {
      * @return
      */
     
-    public static byte[] charToByte(char c) {
+    public final static byte[] charToByte(char c) {
     	byte[] bytes = new byte[2];
     	
     	bytes[0] = (byte) (c >> 8);
@@ -33,7 +33,7 @@ public class ByteUtil {
 	 * @return
 	 */
 	
-    public static byte[] intToByte(int i) {
+    public final static byte[] intToByte(int i) {
         byte[] bytes = new byte[4];
 
         bytes[0] = (byte) (i >> 24);
@@ -51,7 +51,7 @@ public class ByteUtil {
      * @return
      */
     
-    public static byte[] longToByte(long l) {
+    public final static byte[] longToByte(long l) {
         byte[] bytes = new byte[8];
         
         bytes[0] = (byte) (l >> 56);
@@ -74,7 +74,7 @@ public class ByteUtil {
      * @return
      */
     
-    public static char byteToChar(byte[] bytes, int startIdx) {
+    public final static char byteToChar(byte[] bytes, int startIdx) {
     	char c = Character.forDigit((bytes[startIdx] << 8) | (bytes[startIdx+1]),10);
     	return c;
     }
@@ -86,7 +86,7 @@ public class ByteUtil {
      * @return
      */
 
-    public static char byteToChar(byte[] bytes) {
+    public final static char byteToChar(byte[] bytes) {
         return byteToChar(bytes,0);
     }
 
@@ -98,7 +98,7 @@ public class ByteUtil {
      * @return
      */
 
-    public static int byteToInt(byte[] bytes, int startIdx) {
+    public final static int byteToInt(byte[] bytes, int startIdx) {
         int i = 0;
         i+=bytes[startIdx];
         i+=bytes[startIdx+1] << 8;
@@ -114,7 +114,7 @@ public class ByteUtil {
      * @return
      */
 
-    public static int byteToInt(byte[] bytes) {
+    public final static int byteToInt(byte[] bytes) {
         return byteToInt(bytes,0);
     }
 
@@ -125,7 +125,7 @@ public class ByteUtil {
      * @return
      */
 
-    public static long byteToLong(byte[] bytes, int startIdx) {
+    public final static long byteToLong(byte[] bytes, int startIdx) {
         long i = 0;
         i+=bytes[startIdx];
         i+=bytes[startIdx+1] << 8;
@@ -145,7 +145,7 @@ public class ByteUtil {
      * @return
      */
 
-    public static long byteToLong(byte[] bytes) {
+    public final static long byteToLong(byte[] bytes) {
         return byteToLong(bytes,0);
     }
     
@@ -157,7 +157,7 @@ public class ByteUtil {
      * @return
      */
     
-    public static byte[] leftShift(byte[] bytes, int len) {
+    public final static byte[] leftShift(byte[] bytes, int len) {
         if(bytes == null || bytes.length <= len)
             return new byte[bytes.length];
         int idx = 0;
@@ -174,7 +174,7 @@ public class ByteUtil {
      * @return
      */
     
-    public static byte[] rightShift(byte[] bytes, int len) {
+    public final static byte[] rightShift(byte[] bytes, int len) {
         if(bytes == null || bytes.length <= len)
             return new byte[bytes.length];
         int idx = 0;
@@ -192,7 +192,7 @@ public class ByteUtil {
      * @param lineLen
      */
 
-	public static void bytePrint(byte[] bytes, int lineLen) {
+	public final static void bytePrint(byte[] bytes, int lineLen) {
 
 		if (bytes.length < lineLen) {
 			
@@ -231,7 +231,7 @@ public class ByteUtil {
 	 * @param bytes
 	 */
 	
-	public static void bytePrint(byte[] bytes) {
+	public final static void bytePrint(byte[] bytes) {
 		bytePrint(bytes,8);
 	}
 
