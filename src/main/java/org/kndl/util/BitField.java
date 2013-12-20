@@ -68,6 +68,16 @@ public final class BitField {
     }
 
     /**
+     * Shift the bitfield to the left by fieldSize number of bits.
+     *
+     * @return
+     */
+
+    public final BitField sl() {
+        return sl(fieldSize);
+    }
+
+    /**
      * Shift the bitfield to the right by the number of bits specified by numBits.
      *
      * @param numBits
@@ -75,8 +85,18 @@ public final class BitField {
      */
 
     public final BitField sr(int numBits) {
-        this.field = this.field >> numBits;
+        this.field = this.field >>> numBits;
         return this;
+    }
+
+    /**
+     * Shift the bitfield to the right by fieldSize number of bits.
+     *
+     * @return
+     */
+
+    public final BitField sr() {
+        return sr(fieldSize);
     }
 
     /**
