@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  */
 
-public class IDUtil {
+public final class IDUtil {
 	
 	/**
 	 * Used for the rolling integer index
