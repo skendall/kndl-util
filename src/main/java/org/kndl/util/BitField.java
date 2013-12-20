@@ -102,6 +102,17 @@ public final class BitField {
         return this;
     }
 
+    /**
+     * Clears the bitfield to all zeroes.
+     *
+     * @return
+     */
+
+    public final BitField clear() {
+        this.field = 0;
+        return this;
+    }
+
     // accessors
 
     public final long get(int fieldPosition) {
