@@ -1,13 +1,28 @@
 package org.kndl.util;
 
 /**
+ * Convenience object the provides a way to create a bit field
+ * based on a specified field size (defaults to 4 bits) and an
+ * initial value.  The field can be accessed and mutated in a
+ * variety of different ways easily and has the ability to
+ * "serialize/deserialize" easily as well.
  *
- *
+ * @author skendall
  *
  */
 public final class BitField {
 
+    /**
+     * The backing field store
+     */
+
     private long field;         // bit field
+
+    /**
+     * The size of each field; the fields must be all the same
+     * size.  Additionally, making the field size non-divisible
+     * by 64 has potentially catastrophic consequences.
+     */
 
     private int fieldSize;      // size of the field values in bits
 
