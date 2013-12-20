@@ -36,7 +36,7 @@ public final class BitField {
     }
 
     public BitField() {
-        this(0,4);
+        this(4);
     }
 
     // mutators
