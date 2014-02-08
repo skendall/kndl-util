@@ -1,11 +1,13 @@
 package org.kndl.util;
 
 /**
- * Convenience object the provides a way to create a bit field
+ * Convenience object that provides a way to create a bit field
  * based on a specified field size (defaults to 4 bits) and an
  * initial value.  The field can be accessed and mutated in a
  * variety of different ways easily and has the ability to
  * "serialize/deserialize" easily as well.
+ *
+ * Bit field size is limited to 64 bits (the max size of a long).
  *
  * @author skendall
  *
@@ -120,6 +122,8 @@ public final class BitField {
      */
 
     public final BitField mask(int startIdx, int endIdx) {
+        long mask = (long)(Math.pow(2,startIdx) - Math.pow(2,endIdx));
+        this.field = field & mask;
         return this;
     }
 
@@ -152,6 +156,10 @@ public final class BitField {
 
     public final long toLong() {
         return field;
+    }
+
+    public String toString() {
+        return Long.toBinaryString(field);
     }
 
 }

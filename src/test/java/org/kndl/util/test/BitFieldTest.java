@@ -64,4 +64,11 @@ public class BitFieldTest {
         f.sr();
         assertTrue(f.get(0) == 10);
     }
+
+    @Test
+    public void mask() {
+        BitField f = new BitField(4);
+        f = f.set(0,9).mask(4,1);
+        assertTrue(f.get(0) == 8);
+    }
 }
