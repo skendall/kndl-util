@@ -26,11 +26,28 @@ public final class BitField {
      * by 64 has potentially catastrophic consequences.
      */
 
-    private int fieldSize;      // size of the field values in bits
+    private int[] fieldSize;      // size of the field values in bits
+
+    private int curPos = 0;
+
+    public BitField(int[] fieldSizes) {
+        this.field = 0;
+        int totalSize = 0;
+        for(int i=0;i<fieldSizes.length;i++) {
+            totalSize += fieldSizes[i];
+        }
+        if(totalSize > 64)
+            throw new RuntimeException("Configured field sizes are greater than 64-bits.");
+        this.fieldSize = new int[fieldSizes.length+1];
+        System.arraycopy(fieldSizes,0,fieldSize,0,fieldSizes.length);
+        fieldSize[fieldSize.length-1] = (64 - totalSize);
+    }
 
     public BitField(long initialNum, int fieldSize) {
         this.field = initialNum;
-        this.fieldSize = fieldSize;
+        this.fieldSize = new int[64/fieldSize];
+        for(int i=0;i<this.fieldSize.length;i++)
+            this.fieldSize[i] = fieldSize;
     }
 
     public BitField(int fieldSize) {
@@ -52,8 +69,8 @@ public final class BitField {
      */
 
     public final BitField set(int fieldPosition, long value) {
-        long tVal = value & (long)(Math.pow(2,fieldSize))-1;
-        this.field = field | (tVal << (fieldSize * fieldPosition));
+        long tVal = value & (long)(Math.pow(2,fieldSize[fieldPosition]))-1;
+        this.field = field | (tVal << getFieldOffset(fieldPosition));
         return this;
     }
 
@@ -76,7 +93,7 @@ public final class BitField {
      */
 
     public final BitField sl() {
-        return sl(fieldSize);
+        return sl(fieldSize[curPos++]);
     }
 
     /**
@@ -98,7 +115,7 @@ public final class BitField {
      */
 
     public final BitField sr() {
-        return sr(fieldSize);
+        return sr(fieldSize[curPos--]);
     }
 
     /**
@@ -141,17 +158,12 @@ public final class BitField {
     // accessors
 
 
-    public final int getFieldSize() {
-        return fieldSize;
-    }
-
-    public final void setFieldSize(int fieldSize) {
-        clear();
-        this.fieldSize = fieldSize;
+    public final int getFieldSize(int fieldPosition) {
+        return fieldSize[fieldPosition];
     }
 
     public final long get(int fieldPosition) {
-        return (field >>> (fieldPosition * fieldSize)) & (long)(Math.pow(2,fieldSize))-1;
+        return (field >>> getFieldOffset(fieldPosition)) & (long)(Math.pow(2,fieldSize[fieldPosition]))-1;
     }
 
     public final long toLong() {
@@ -160,6 +172,13 @@ public final class BitField {
 
     public String toString() {
         return Long.toBinaryString(field);
+    }
+
+    private int getFieldOffset(int fieldPosition) {
+        int offset = 0;
+        for(int i=0;i<fieldPosition;i++)
+            offset+=fieldSize[i];
+        return offset;
     }
 
 }

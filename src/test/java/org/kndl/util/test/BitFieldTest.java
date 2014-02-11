@@ -36,17 +36,21 @@ public class BitFieldTest {
     }
 
     @Test
-    public void resetFieldSize() {
-        BitField f = new BitField();
-        f.set(0,1);
-        f.set(2,10);
-        assertTrue(f.get(0) == 1);
-        assertTrue(f.get(2) == 10);
-        f.setFieldSize(8);
-        f.set(0,1);
-        f.set(2,10);
-        assertTrue(f.get(0) == 1);
-        assertTrue(f.get(2) == 10);
+    public void setFieldAndClearVariableLength() {
+        int[] fields = new int[] {4,1,4,2,2,1};
+        BitField f = new BitField(fields);
+        f.set(0,7);
+        f.set(1,1);
+        f.set(2,4);
+        f.set(3,3);
+        f.set(4,2);
+        f.set(5,1);
+        assertTrue(f.get(0) == 7);
+        assertTrue(f.get(1) == 1);
+        assertTrue(f.get(2) == 4);
+        assertTrue(f.get(3) == 3);
+        assertTrue(f.get(4) == 2);
+        assertTrue(f.get(5) == 1);
     }
 
     @Test
