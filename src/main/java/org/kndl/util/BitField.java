@@ -75,6 +75,17 @@ public final class BitField {
     }
 
     /**
+     * Returns the maximum size of the specific field position.
+     *
+     * @param fieldPosition
+     * @return
+     */
+
+    public int maxSize(int fieldPosition) {
+        return (int)Math.pow(2,fieldSize[fieldPosition])-1;
+    }
+
+    /**
      * Shift the bitfield to the left by the number of bits specified by numBits.
      *
      * @param numBits

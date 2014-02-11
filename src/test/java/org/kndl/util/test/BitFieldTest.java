@@ -54,6 +54,15 @@ public class BitFieldTest {
     }
 
     @Test
+    public void maxFieldSize() {
+        BitField f = new BitField(new int[] {1,2,3,4});
+        assert f.maxSize(0) == 1;
+        assert f.maxSize(1) == 3;
+        assert f.maxSize(2) == 7;
+        assert f.maxSize(3) == 15;
+    }
+
+    @Test
     public void sl() {
         BitField f = new BitField(4);
         f.set(0,10);
